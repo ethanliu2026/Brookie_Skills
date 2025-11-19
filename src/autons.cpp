@@ -86,8 +86,8 @@ void skills() {
   
   wait(300, msec);
   Intake.stop();
- //chassis.turn_to_angle(316);
- // chassis.drive_distance(11.8, 316, 8, 10, 1.5, 300, 800);
+  //chassis.turn_to_angle(316);
+  //chassis.drive_distance(11.8, 316, 8, 10, 1.5, 300, 800);
   chassis.turn_to_point(11.5, -15, 0, 5, 2, 400, 600);
   straightline_to_pose(11.5, -15, 10, 6, 0.5, 700, 1500);
   chassis.drive_distance(-2);
@@ -112,33 +112,31 @@ void skills() {
   //straightline_to_pose(48, -48, 12, 6, 1, 550, 800);
   //MatchLoader.set(true);
   //Intake.spin(forward);
-  //chassis.turn_to_point(48, -72, 0, 5, 4, 400, 600);
-  
+  //chassis.turn_to_point(48, -66, 0, 5, 4, 400, 600);
+  //straightline_to_pose(48, -66, 10, 8, 1, 500, 800);
   //wait(3000, msec);
-
-
-  //straightline_to_pose(0, 0, 12);
-  //chassis.turn_to_angle(270);
+  //straightline_to_pose(48, -48, 12);
+  //chassis.turn_to_point(60, -24, 0, 6, 2, 300, 300);
   //MatchLoader.set(false);
-  //straightline_to_pose(0, 0, 12);
-  //autoResetPosition();
-  //chassis.turn_to_angle(180);
-  //straightline_to_pose(0, 0, 12);
-  //autoResetPosition(); //can be deleted
-  //chassis.turn_to_angle(90);
-  //straightline_to_pose(0, 0, 12);
-  //chassis.turn_to_angle(0);
-  //straightline_to_pose(0, 0, 12);
-  //Hood.set(false);
-  //Intake.spin(forward, 12, volt);
-  //wait(4000, msec);
-  //MatchLoader.set(true);
-  //straightline_to_pose(0, 0, 12);
-  //Hood.set(true);
-  //wait(4000, msec);
-  //straightline_to_pose(0, 0, 12);
-  //Hood.set(false);
-  //wait(4000, msec);
+  /*
+  straightline_to_pose(60, -24, 12, 8, 2, 400, 300);
+  chassis.turn_to_point(60, 36, 0, 10, 1, 300, 300);
+  straightline_to_pose(60, 36, 12, 8, 2, 800, 300);
+  chassis.turn_to_point(48, 36, 0, 10, 1, 300, 300);
+  straightline_to_pose(48, 36, 12, 8, 1, 500, 300);
+  chassis.turn_to_point(48, 8, 0, 8, 1, 300, 300);
+  straightline_to_pose(48, 32, 8, 8, 1, 400, 400);
+  Hood.set(false);
+  wait(2000, msec);
+  MatchLoader.set(true);
+  straightline_to_pose(48, 10, 10, 8, 1, 400, 300);
+  Hood.set(true);
+  wait(3000, msec);
+  straightline_to_pose(48,32, 8, 8, 1, 400, 300);
+  Hood.set(false);
+  wait(2000, msec);
+  MatchLoader.set(false);
+  */
 
   while (true) {
     Brain.Screen.clearScreen();
