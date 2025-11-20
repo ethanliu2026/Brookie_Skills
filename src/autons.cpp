@@ -60,6 +60,67 @@ void skillsAuto() {
 }
 
 void skills() {
+  startBlueAutonTasks();
+  chassis.set_coordinates(0, -47.2, -180);
+  hood_down = true;
+  IntakeLift.set(false);
+  Intake.spin(forward, 12, volt);
+  chassis.drive_distance(30, 180, 5, 10);
+  wait(100, msec);
+  chassis.drive_distance(-7, 180, 7, 10, 2, 200, 1000);
+  wait(200, msec);
+  Intake.spin(forward, 12, volt);
+  chassis.drive_distance(15, 180, 5, 10, 2, 200, 700);
+  wait(500, msec);
+  chassis.drive_distance(-5, 180, 7, 10, 2, 200, 700);//can be deleted
+  wait(200, msec); //can be deleted
+  chassis.drive_distance(8, 180, 7, 10, 2, 200, 700);//can be deleted
+  wait(300, msec); //can be deleted
+  chassis.drive_distance(-30, 180, 10, 10, 2, 200, 800); //previously timeout 1500
+
+  chassis.turn_to_angle(0, 7, 1, 700, 1000);
+  resetPositionSkills();
+  //autoResetPosition();
+  wait(300, msec);
+  chassis.turn_to_point(21.9, -30, 0, 6, 5, 450, 600);
+  straightline_to_pose(21.9, -30, 8, 6, 1, 550, 750); //58 degrees, 20.88, -31.30
+  chassis.turn_to_point(11.3, -14.95, 0, 5, 2, 400, 600);
+  straightline_to_pose(11.3, -15, 14.95, 6, 0.5, 500, 800);
+  IntakeLift.set(true);
+  chassis.drive_stop(brake);
+  Intake.spin(reverse, 12, volt);
+  wait(600, msec);
+  scoreLowSkills();
+  wait(2500, msec);
+  Intake.stop();
+  chassis.drive_distance(-20);
+  IntakeLift.set(false);
+  chassis.turn_to_point(45.2, -53., 0, 7, 5, 500, 600);//53.1
+  matchloader_down = true;
+  straightline_to_pose(45.2, -53., 8, 8, 0.1, 550, 900); //drive to matchloader
+  chassis.turn_to_angle(180, 8, 1, 250, 400); //turn to matchloader
+  chassis.drive_distance(12, 180, 10, 6, 3, 350, 400);
+  hood_down = true;
+  Intake.spin(forward, 12.7, volt);
+  chassis.drive_distance(15, 180, 3, 6, 3, 800, 1200); //stay to intake
+  chassis.drive_distance(-10, 180, 10, 6, 3, 350, 400);
+  matchloader_down = false;
+  //straightline_to_pose(58.7, -48, 10, 8, 1, 600, 900);
+  //chassis.set_coordinates(chassis.get_X_position(), chassis.get_Y_position(), chassis.get_absolute_heading());
+  chassis.drive_to_point(58.2, -40, 0, 3, 6, 7, 1200, 1500); 
+  chassis.turn_to_angle(180, 7, 1, 700, 1000);
+  straightline_to_pose(58.2, 36, 10, 0, 1, 1000, 1200, true); //46, 24
+  //chassis.drive_to_point(58.7, 24, 180, 5, 6, 7, 800, 1000);
+  chassis.turn_to_point(45.2, 36, 0, 8, 1, 300, 600);
+  straightline_to_pose(45.2, 36, 8, 8, 1, 400, 400);
+  chassis.turn_to_angle(0, 7, 1, 700, 1000);
+  chassis.drive_distance(-10);
+  hood_down = false;
+  wait(3000, msec);
+  matchloader_down = true;
+  chassis.drive_distance(30);
+  chassis.drive_distance(6);
+  /*
   chassis.set_coordinates(0, -47.2, -180);
   Hood.set(true);
   IntakeLift.set(false);
@@ -115,6 +176,7 @@ void skills() {
   //straightline_to_pose(48, -48, 12);
   //chassis.turn_to_point(60, -24, 0, 6, 2, 300, 300);
   //MatchLoader.set(false);
+  */
   /*
   straightline_to_pose(60, -24, 12, 8, 2, 400, 300);
   chassis.turn_to_point(60, 36, 0, 10, 1, 300, 300);
