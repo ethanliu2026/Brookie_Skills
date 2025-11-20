@@ -38,9 +38,9 @@ void scoreLowSkills() {
 }
 
 void scoreHighSkills() {
-  IntakeTop.spin(reverse, 4.5, volt); //6
-  IntakeMid.spin(forward, 10, volt); //10
-  IntakeBottom.spin(forward, 12, volt);
+  IntakeTop.spin(reverse, 3, volt); //6
+  IntakeMid.spin(forward, 4, volt); //10
+  IntakeBottom.spin(forward, 8, volt);
 }
 
 void startDriverTasks() {
