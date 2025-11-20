@@ -61,7 +61,6 @@ void skillsAuto() {
 
 void skills() {
   startBlueAutonTasks();
-  startBlueAutonTasks();
   chassis.set_coordinates(0, -47.2, -180);
   hood_down = true;
   hood_down = true;
