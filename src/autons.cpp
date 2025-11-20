@@ -101,8 +101,10 @@ void skills() {
   RF.stop(hold);
   RM.stop(hold);
   RB.stop(hold);
+  Intake.spin(reverse, 12, volt);
+  wait(1000, msec);
   scoreLowSkills();
-  wait(3500, msec);
+  wait(2500, msec);
   Intake.stop();
   
   chassis.drive_distance(-10);
