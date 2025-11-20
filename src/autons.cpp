@@ -61,7 +61,9 @@ void skillsAuto() {
 
 void skills() {
   startBlueAutonTasks();
+  startBlueAutonTasks();
   chassis.set_coordinates(0, -47.2, -180);
+  hood_down = true;
   hood_down = true;
   IntakeLift.set(false);
   Intake.spin(forward, 12, volt);
@@ -193,7 +195,6 @@ void skills() {
   //straightline_to_pose(48, -48, 12);
   //chassis.turn_to_point(60, -24, 0, 6, 2, 300, 300);
   //MatchLoader.set(false);
-  */
   /*
   straightline_to_pose(60, -24, 12, 8, 2, 400, 300);
   chassis.turn_to_point(60, 36, 0, 10, 1, 300, 300);
