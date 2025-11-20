@@ -226,6 +226,7 @@ int rc_auto_loop_function_Controller1() {
 
       if(Controller1.ButtonB.pressing()) {
         MatchLoader.set(!(MatchLoader.value()));
+        matchloader_down = !matchloader_down;
         vexDelay(250);
       }
       if(Controller1.ButtonDown.pressing()) {
@@ -238,7 +239,7 @@ int rc_auto_loop_function_Controller1() {
       }
       else {
 
-        IntakeLift.set(false);
+        //IntakeLift.set(false);
       }
 
       if (Controller1.ButtonR1.pressing()) {
