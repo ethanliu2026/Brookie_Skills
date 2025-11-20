@@ -95,12 +95,7 @@ void skills() {
   Intake.spin(forward, 12, volt);
   wait(100, msec);
   IntakeLift.set(true);
-  LF.stop(hold);
-  LM.stop(hold);
-  LB.stop(hold);
-  RF.stop(hold);
-  RM.stop(hold);
-  RB.stop(hold);
+  chassis.drive_stop(brake);
   Intake.spin(reverse, 12, volt);
   wait(1000, msec);
   scoreLowSkills();
