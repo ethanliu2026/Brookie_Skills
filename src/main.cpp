@@ -90,12 +90,12 @@ PORT3,     -PORT4,
 PORT18,
 
 //Input the Forward Tracker diameter (reverse it to make the direction switch):
-2.03,
+2.02,
 
 //Input Forward Tracker center distance (a positive distance corresponds to a tracker on the right side of the robot, negative is left.)
 //For a zero tracker tank drive with odom, put the positive distance from the center of the robot to the right side of the drive.
 //This distance is in inches:
-0.1,
+-1.5,
 
 //Input the Sideways Tracker Port, following the same steps as the Forward Tracker Port:
 PORT20,
@@ -104,7 +104,7 @@ PORT20,
 -2.81,
 
 //Sideways tracker center distance (positive distance is behind the center of the robot, negative is in front):
-1.5
+2.6
 
 );
 
