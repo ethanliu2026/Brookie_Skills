@@ -126,7 +126,7 @@ void skills() {
   hood_down = true;
   Intake.spin(forward, 12.7, volt);
   chassis.drive_distance(20, 1, 3, 6, 3, 800, 1300); //stay to intake, originally 15
-  chassis.drive_distance(-34, -3, 10, 6, 1, 460, 480);
+  chassis.drive_distance(-34, -3, 8, 6, 1, 460, 480);
   chassis.drive_distance(-6, 0, 5, 6, 1, 100, 150); //aligning with long goal
   hood_down = false;
   wait(2500, msec);
@@ -137,10 +137,10 @@ void skills() {
   //chassis.turn_to_point(0, 47.2);
   chassis.turn_to_point(0, 40);
   //straightline_to_pose(0, 47.2, 10);
-  straightline_to_pose(-1, 40, 10);
+  straightline_to_pose(1, 40, 10);
   //chassis.drive_to_point(0, 47.2, 8, 10, 8, 1, 1200, 1500);
   chassis.turn_to_angle(0);
-  straightline_to_pose(-1, 47.2, 6, 6, 1, 400, 500);
+  straightline_to_pose(0, 47.2, 5, 6, 0.1, 400, 500);
   chassis.drive_stop(coast);
   chassis.set_coordinates(0, -47.2, -180);
   hood_down = true;
@@ -159,6 +159,10 @@ void skills() {
   wait(300, msec); //can be deleted
   chassis.drive_distance(-30, 180, 10, 10, 2, 200, 800);
 
+  chassis.turn_to_angle(0, 7, 1, 700, 1000);
+  resetPositionSkills();
+  //autoResetPosition();
+  wait(300, msec);
   /*
   chassis.set_coordinates(0, -47.2, -180);
   Hood.set(true);
