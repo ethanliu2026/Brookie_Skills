@@ -113,8 +113,8 @@ void skills() {
   chassis.turn_to_angle(180, 7, 1, 700, 1000);
   straightline_to_pose(58.2, 27, 10, 0, 1, 1000, 1200, true); //46, 24
   //chassis.drive_to_point(45.2, 36, 4, 5, 6, 7, 800, 1000);
-  chassis.turn_to_point(46.9, 36, 0, 8, 1, 300, 600);
-  straightline_to_pose(46.9, 36, 8, 8, 1, 400, 400);
+  chassis.turn_to_point(47.5, 36, 0, 8, 1, 300, 600);
+  straightline_to_pose(47.5, 36, 8, 8, 1, 400, 400);
   chassis.turn_to_angle(0, 7, 1, 700, 1000);
   chassis.drive_distance(-12, 0, 7, 7);
   hood_down = false;
