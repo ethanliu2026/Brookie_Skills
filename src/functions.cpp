@@ -32,7 +32,7 @@ void storeBall (double speed, const vex::voltageUnits unit){
 }
 
 void scoreLowSkills() {
-  IntakeBottom.spin(reverse, 5, volt);
+  IntakeBottom.spin(reverse, 4.6, volt);
   IntakeMid.spin(reverse, 9, volt);
   IntakeTop.spin(reverse, 12, volt);
 }

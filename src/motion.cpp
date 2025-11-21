@@ -630,7 +630,7 @@ void straightline_to_pose(float x, float y, float driveVolt, float headingVolt, 
     float actualX = chassis.get_X_position();
     float actualY = chassis.get_Y_position();
     if (negative) {
-      chassis.drive_distance(-get_hypot(x, y, actualX, actualY), get_heading(x, y, actualX, actualY), driveVolt, headingVolt, settleError, settleTime, Timeout);
+      chassis.drive_distance(-get_hypot(x, y, actualX, actualY), get_heading(x, y, actualX, actualY)+180, driveVolt, headingVolt, settleError, settleTime, Timeout);
     } else {
       chassis.drive_distance(get_hypot(x, y, actualX, actualY), get_heading(x, y, actualX, actualY), driveVolt, headingVolt, settleError, settleTime, Timeout);
     }
@@ -676,6 +676,10 @@ float get_heading(float desiredX, float desiredY, float actualX, float actualY) 
       return (270 - headingCorrection + 180); //quad 3
     } else if (differenceX >= 0 && differenceY <= 0) {
       return (360 - headingCorrection + 90); //quad 4
+    }
+
+    if (headingCorrection < 0) {
+      headingCorrection += 360;
     }
 
     return headingCorrection; //for edge cases
