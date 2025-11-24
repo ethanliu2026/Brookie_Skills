@@ -171,7 +171,7 @@ void skills() {
   //chassis.turn_to_angle(0);
   chassis.set_coordinates(-48, 27, chassis.get_absolute_heading());
   //chassis.drive_to_point(-49.2, 64, 6, 8, 1, 3, 350, 400);
-  straightline_to_pose(-48, 64, 8, 6, 0.1, 400, 500); //drive to second matchloader
+  straightline_to_pose(-47.5, 64, 8, 6, 0.1, 400, 500); //drive to second matchloader
   //chassis.drive_distance(37, 3, 8, 1, 3, 350, 400);
   
   hood_down = true;
@@ -193,7 +193,8 @@ void skills() {
   //straightline_to_pose(-46.6, -39, 8, 8, 1, 400, 500, true);
   matchloader_down = true;
   chassis.turn_to_angle(180, 7, 1, 300, 500);
-  chassis.drive_to_point(-47.8, -66, 6, 8, 1, 3, 350, 400);
+  straightline_to_pose(-46.3, -66, 6, 1, 1, 500, 600); //approach matchloader 4
+  //chassis.drive_to_point(-46.4, -66, 6, 8, 1, 3, 350, 400);
   //chassis.drive_distance(27, 183, 8, 1, 3, 350, 400);
   
   hood_down = true;
