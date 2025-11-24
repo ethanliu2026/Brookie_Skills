@@ -193,7 +193,7 @@ void skills() {
   //chassis.drive_distance(-21.5, 0, 7, 7, 1, 500, 600); //back into goal
   hood_down = false;
   wait(700, msec);
-  chassis.drive_distance(10, 0, 12, 0, 1, 300, 400);
+  //chassis.drive_distance(10, 0, 12, 0, 1, 300, 400);
   chassis.drive_to_point(0, -60, 0, 12, 7, 1, 1100, 1500);
   chassis.set_coordinates(-48, -27, chassis.get_absolute_heading());
   //chassis.turn_to_angle(0);
