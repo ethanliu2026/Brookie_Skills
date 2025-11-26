@@ -690,7 +690,7 @@ void Drive::holonomic_drive_to_pose(float X_position, float Y_position, float an
 
 void Drive::control_arcade(){
   float throttle = deadband(controller(primary).Axis3.value(), 5);
-  float turn = deadband(controller(primary).Axis1.value(), 3);
+  float turn = deadband(controller(primary).Axis1.value(), 7);
   DriveL.spin(fwd, to_volt(throttle+turn), volt);
   DriveR.spin(fwd, to_volt(throttle-turn), volt);
 }
