@@ -99,9 +99,9 @@ void skills() {
   chassis.drive_distance(-20, 0, 12, 0, 2, 380, 470); //back away from low goal
   Intake.spin(forward, 12.7, volt);
   intake_lift = false;
-  chassis.turn_to_point(45.35, -53.3, 0, 7, 5, 400, 520);
+  chassis.turn_to_point(45., -53.3, 0, 7, 5, 400, 520);
   matchloader_down = true;
-  straightline_to_pose(45.5, -53.3, 8, 8, 0.1, 550, 650); //drive to matchloader 1
+  straightline_to_pose(45., -53.3, 8, 8, 0.1, 550, 650); //drive to matchloader 1
   chassis.turn_to_angle(180, 8, 1, 250, 300); //turn to matchloader 1
   //straightline_to_pose(45.5, -65.3, 8, 3, 1, 350, 400);
   chassis.drive_distance(12, 180, 10, 6, 3, 350, 400);
