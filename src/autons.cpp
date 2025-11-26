@@ -84,17 +84,17 @@ void skills() {
   wait(300, msec);
   //chassis.turn_to_point(21.9, -30, 0, 6, 5, 350, 450); //turn to three pile
   //straightline_to_pose(21.9, -30, 8, 6, 1, 500, 650); //drive to three pile
-  chassis.drive_to_point(21.9, -24, 0, 8, 6, 7, 500, 650); //drive to three pile, -27
-  chassis.turn_to_point(11, -14.2, 0, 5, 2, 300, 450); //turn to low goal
-  straightline_to_pose(11, -14.2, 18, 3, 0.5, 450, 650); //drive to low goal
+  chassis.drive_to_point(21.9, -23, 0, 8, 6, 7, 500, 650); //drive to three pile, -27
+  chassis.turn_to_point(10.8, -14.2, 0, 5, 2, 300, 450); //turn to low goal
+  straightline_to_pose(10.8, -14.2, 12, 3, 0.5, 450, 650); //drive to low goal
   intake_lift = true;
   //chassis.drive_stop(brake);
   Intake.spin(forward);
-  chassis.drive_distance(0.5, 0, 3, 0, 2, 80, 100);
+  chassis.drive_distance(0.7, 0, 3, 0, 2, 80, 100);
   Intake.spin(reverse, 11, volt);
   wait(270, msec); //350
   scoreLowSkills();
-  wait(1900, msec); //2400
+  wait(2200, msec); //2400
   Intake.stop();
   chassis.drive_distance(-20, 0, 12, 0, 2, 380, 470); //back away from low goal
   Intake.spin(forward, 12.7, volt);
