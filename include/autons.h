@@ -28,3 +28,4 @@ void red_left_elim();
 void red_right_elim();
 
 void skills();
+void skillsAuto();

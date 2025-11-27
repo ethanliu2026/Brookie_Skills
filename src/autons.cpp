@@ -56,7 +56,12 @@ void odom_constants(){
 }
 
 void skillsAuto() {
-  
+  chassis.set_coordinates(0, -47.2, 0);
+  resetPositionSkills();
+  straightline_to_pose(0, -36, 8);
+  chassis.turn_to_point(48, -36);
+  straightline_to_pose(48, -36, 8, 2, 1, 800, 1000);
+  chassis.drive_stop(brake);
 }
 
 void skills() {
@@ -80,7 +85,7 @@ void skills() {
 
   chassis.turn_to_angle(0, 7, 0.1, 700, 1000);
   resetPositionSkills();
-  //autoResetPosition();
+  
   wait(300, msec);
   //chassis.turn_to_point(21.9, -30, 0, 6, 5, 350, 450); //turn to three pile
   //straightline_to_pose(21.9, -30, 8, 6, 1, 500, 650); //drive to three pile
@@ -88,7 +93,6 @@ void skills() {
   chassis.turn_to_point(10.8, -14.2, 0, 5, 2, 300, 450); //turn to low goal
   straightline_to_pose(10.8, -14.2, 12, 3, 0.5, 450, 650); //drive to low goal
   intake_lift = true;
-  //chassis.drive_stop(brake);
   Intake.spin(forward);
   chassis.drive_distance(0.7, 0, 3, 0, 2, 80, 100);
   Intake.spin(reverse, 11, volt);
@@ -99,9 +103,9 @@ void skills() {
   chassis.drive_distance(-20, 0, 12, 0, 2, 380, 470); //back away from low goal
   Intake.spin(forward, 12.7, volt);
   intake_lift = false;
-  chassis.turn_to_point(45., -53.3, 0, 7, 5, 400, 520);
+  chassis.turn_to_point(45., -50.3, 0, 7, 5, 400, 520);
   matchloader_down = true;
-  straightline_to_pose(45., -53.3, 8, 8, 0.1, 550, 650); //drive to matchloader 1
+  straightline_to_pose(45., -50.3, 8, 8, 0.1, 550, 650); //drive to matchloader 1
   chassis.turn_to_angle(180, 8, 1, 250, 300); //turn to matchloader 1
   //straightline_to_pose(45.5, -65.3, 8, 3, 1, 350, 400);
   chassis.drive_distance(12, 180, 10, 6, 3, 350, 400);
@@ -214,6 +218,7 @@ void skills() {
 
   //chassis.turn_to_angle(0);
   //autoResetPosition();
+  
   /*
   chassis.set_coordinates(0, -47.2, -180);
   Hood.set(true);
@@ -231,6 +236,7 @@ void skills() {
   wait(300, msec); //can be deleted
   chassis.drive_distance(-30, 180, 10, 10, 2, 200, 800); //previously timeout 1500
 >>>>>>> 5585698 (auton route 11.20) */
+
   while (true) {
     Brain.Screen.clearScreen();
     Brain.Screen.printAt(5, 20, "JAR Template v1.2.0");

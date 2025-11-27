@@ -1,5 +1,6 @@
 #include "JAR-Template/drive.h"
 #include "autons.h"
+#include "motion.h"
 #include "vex.h"
 #include "tasks.h"
 

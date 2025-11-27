@@ -12,7 +12,7 @@ bool facing_right = false;
 bool facing_left = false;
 
 float CLOSE_DIST = 36;
-float FAR_DIST = 72;
+float FAR_DIST = 70.4; //previously 72
 
 float XCoord;
 float YCoord;
@@ -25,8 +25,8 @@ float verticalDifference;
 
 /* DISTANCE RESET */
 
-float sideDistPos = 3.7;
-float backDistPos = 3.0;
+float sideDistPos = 2.9; //previously 3.7
+float backDistPos = 3.3; //previously 3.0
 
 void updateQuadrant(float x, float y) {
   if (x > 0 && y > 0) {
