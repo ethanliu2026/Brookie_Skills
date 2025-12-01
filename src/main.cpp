@@ -66,7 +66,7 @@ PORT4,
 
 //Gyro scale, this is what your gyro reads when you spin the robot 360 degrees.
 //For most cases 360 will do fine here, but this scale factor can be very helpful when precision is necessary.
-354,
+353.4,
 
 /*---------------------------------------------------------------------------*/
 /*                                  PAUSE!                                   */
@@ -155,9 +155,10 @@ void pre_auton() {
 
     /* COLOR SORT */
     Controller1.Screen.setCursor(2,10);
-    Controller1.Screen.print("Sort:");
+    Controller1.Screen.print("ang:");
     Controller1.Screen.setCursor(2,16);
-    Controller1.Screen.print(getColorSortState().c_str());
+    //Controller1.Screen.print(getColorSortState().c_str());
+    Controller1.Screen.print(chassis.get_absolute_heading());
 
 
     /* AUTON SELECTION */
