@@ -3,6 +3,7 @@
 #include "motion.h"
 #include "vex.h"
 #include "tasks.h"
+#include "functions.cpp"
 
 using namespace vex;
 competition Competition;
@@ -160,6 +161,24 @@ void pre_auton() {
     //Controller1.Screen.print(getColorSortState().c_str());
     Controller1.Screen.print(chassis.get_absolute_heading());
 
+    /* MOTOR SPEED */
+    Controller1.Screen.setCursor(3,1);
+    Controller1.Screen.print("top:");
+    Controller1.Screen.setCursor(3,5);
+    Controller1.Screen.print(highVolt);
+
+    Controller1.Screen.setCursor(3,9);
+    Controller1.Screen.print("bottom:");
+    Controller1.Screen.setCursor(3,16);
+    Controller1.Screen.print(lowVolt);
+
+    Controller1.Screen.setCursor(4,1);
+    if(selVolt) {
+      Controller1.Screen.print("low");
+    }
+    else {
+      Controller1.Screen.print("high");
+    }
 
     /* AUTON SELECTION */
     /*

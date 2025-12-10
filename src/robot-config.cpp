@@ -2,6 +2,7 @@
 #include "vex.h"
 #include "tasks.h"
 #include "functions.h"
+#include "functions.cpp"
 
 using namespace vex;
 using signature = vision::signature;
@@ -240,6 +241,26 @@ int rc_auto_loop_function_Controller1() {
       else {
 
         //IntakeLift.set(false);
+      }
+      
+      if (Controller1.ButtonX.pressing() && Controller1.ButtonY.pressing()) {
+        selVolt = !selVolt;
+      }
+      else if (Controller1.ButtonX.pressing()) {
+        if(selVolt) {
+          lowVolt += 0.01;
+        }
+        else {
+          highVolt += 0.01;
+        }
+      }
+      else if (Controller1.ButtonY.pressing()) {
+        if (selVolt) {
+          lowVolt -= 0.01;
+        }
+        else {
+          highVolt -= 0.01;
+        }
       }
 
       if (Controller1.ButtonR1.pressing()) {
