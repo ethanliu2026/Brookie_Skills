@@ -3,7 +3,6 @@
 #include "motion.h"
 #include "vex.h"
 #include "tasks.h"
-#include "functions.cpp"
 
 using namespace vex;
 competition Competition;

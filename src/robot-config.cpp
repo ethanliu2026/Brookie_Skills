@@ -2,7 +2,6 @@
 #include "vex.h"
 #include "tasks.h"
 #include "functions.h"
-#include "functions.cpp"
 
 using namespace vex;
 using signature = vision::signature;
