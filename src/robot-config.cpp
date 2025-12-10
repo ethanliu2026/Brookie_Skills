@@ -267,7 +267,7 @@ int rc_auto_loop_function_Controller1() {
         */
       }
       else {
-        IntakeLift.set(false);
+        //IntakeLift.set(false);
       }
       
       if (Controller1.ButtonX.pressing() && Controller1.ButtonY.pressing()) {
