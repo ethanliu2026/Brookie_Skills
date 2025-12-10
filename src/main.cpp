@@ -1,9 +1,9 @@
 #include "JAR-Template/drive.h"
 #include "autons.h"
+#include "functions.h"
 #include "motion.h"
 #include "vex.h"
 #include "tasks.h"
-#include "functions.cpp"
 
 using namespace vex;
 competition Competition;
@@ -156,23 +156,18 @@ void pre_auton() {
 
     /* COLOR SORT */
     Controller1.Screen.setCursor(2,10);
-    Controller1.Screen.print("ang:");
+    Controller1.Screen.print("top:");
     Controller1.Screen.setCursor(2,16);
     //Controller1.Screen.print(getColorSortState().c_str());
-    Controller1.Screen.print(chassis.get_absolute_heading());
+    Controller1.Screen.print(highVolt);
 
     /* MOTOR SPEED */
     Controller1.Screen.setCursor(3,1);
-    Controller1.Screen.print("top:");
-    Controller1.Screen.setCursor(3,5);
-    Controller1.Screen.print(highVolt);
-
-    Controller1.Screen.setCursor(3,9);
-    Controller1.Screen.print("bottom:");
-    Controller1.Screen.setCursor(3,16);
+    Controller1.Screen.print("bot:");
+    Controller1.Screen.setCursor(3,6);
     Controller1.Screen.print(lowVolt);
 
-    Controller1.Screen.setCursor(4,1);
+    Controller1.Screen.setCursor(3,10);
     if(selVolt) {
       Controller1.Screen.print("low");
     }

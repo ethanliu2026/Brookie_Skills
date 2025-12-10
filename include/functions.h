@@ -17,3 +17,7 @@ std::string getColorSortState();
 
 void scoreLowSkills();
 void scoreHighSkills();
+
+extern double highVolt;
+extern double lowVolt;
+extern bool selVolt;

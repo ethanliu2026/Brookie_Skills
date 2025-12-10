@@ -2,7 +2,7 @@
 #include "vex.h"
 #include "tasks.h"
 #include "functions.h"
-#include "functions.cpp"
+#include "vex_global.h"
 
 using namespace vex;
 using signature = vision::signature;
@@ -33,6 +33,7 @@ distance LeftDist = distance(PORT6);
 distance BackDist = distance(PORT21);
 optical SortOptical = optical(PORT8);
 inertial IMU = inertial(PORT4);
+bool sort = false;
 
 
 
@@ -58,6 +59,27 @@ int rc_auto_loop_function_Controller1() {
 
     if(RemoteControlCodeEnabled) {
 
+
+      if (Controller1.ButtonR1.pressing()){
+
+         if ((color_data > RED_VALUE - COLOR_TOL) 
+          && (color_data < RED_VALUE + COLOR_TOL)) { //if ring is red, send signal to fling
+          sort = true;
+        } else {
+          sort = false;
+        }
+
+        if (sort && distance_data < 30) {
+          IntakeTop.spin(reverse,highVolt, volt);
+          IntakeMid.spin(reverse, 12.7, volt);
+          IntakeBottom.spin(reverse, 12.7, volt);
+          wait(400, msec);
+        } else {
+          scoreHighSkills();
+        }
+
+
+      }
 
       if (toggle_blue_sort) {
         if ((color_data > RED_VALUE - COLOR_TOL) 
@@ -167,9 +189,14 @@ int rc_auto_loop_function_Controller1() {
          
       }
 
-      if (Controller1.ButtonR1.pressing()) {
-          scoreHighSkills();     
-          }
+      /*if (Controller1.ButtonR1.pressing()) {
+            if((color_data > BLUE_VALUE - COLOR_TOL) && (color_data < BLUE_VALUE + COLOR_TOL)) {
+              scoreHighSkills();    
+            }
+            else if ((color_data > RED_VALUE - COLOR_TOL) && (color_data < RED_VALUE + COLOR_TOL)) {
+              Intake.spin(forward, 12, volt);
+            }
+          }*/
 
       if (Controller1.ButtonL1.pressing()) {
           left_shoulder_not_pressed = false;
@@ -197,12 +224,13 @@ int rc_auto_loop_function_Controller1() {
           intake_is_running = false;
          }
 
+         /*
         if (Controller1.ButtonX.pressing()){
           MatchLoader.set(!(MatchLoader.value()));
           matchloader_down = !matchloader_down;
           vexDelay(250);
           }
-        
+        */
         if (Controller1.ButtonUp.pressing()){
           toggle_red_sort = !toggle_red_sort;
           /*if (blue_alliance) { 
@@ -239,8 +267,7 @@ int rc_auto_loop_function_Controller1() {
         */
       }
       else {
-
-        //IntakeLift.set(false);
+        IntakeLift.set(false);
       }
       
       if (Controller1.ButtonX.pressing() && Controller1.ButtonY.pressing()) {
