@@ -56,17 +56,12 @@ void odom_constants(){
 }
 
 void skillsAuto() {
-  chassis.set_coordinates(0, -47.2, 0);
-  chassis.turn_to_angle(180);
-  //chassis.turn_to_angle(0);
-  /*chassis.set_coordinates(0, -47.2, 0);
+  startBlueAutonTasks();
+  
+  wait(10000, msec);
   resetPositionSkills();
-  straightline_to_pose(0, -42, 8);
-  chassis.turn_to_point(48, -42);
-  chassis.drive_distance(48, 0, 8, 0);
-  //straightline_to_pose(48, -42, 8, 2, 1, 800, 1000);
-  chassis.turn_to_angle(180);
-  chassis.drive_stop(brake);*/
+  
+  wait(300, msec);
 }
 
 void skills() {
@@ -75,13 +70,14 @@ void skills() {
   hood_down = true;
   intake_lift = false;
   IntakeLift.set(false);
-  Intake.spin(forward, 12, volt);
+  Intake.spin(forward, 12.7, volt);
   chassis.drive_distance(30, 180, 5, 10);
   wait(100, msec);
   chassis.drive_distance(-7, 180, 7, 10, 2, 200, 1000);
   wait(200, msec);
   chassis.drive_distance(15, 180, 5, 10, 2, 200, 700);
   wait(500, msec);
+  Intake.spin(forward, 12.7, volt);
   chassis.drive_distance(-5, 180, 7, 10, 2, 200, 700);//can be deleted
   wait(200, msec); //can be deleted
   chassis.drive_distance(8, 180, 7, 10, 2, 200, 700);//can be deleted
@@ -94,9 +90,10 @@ void skills() {
   wait(300, msec);
   //chassis.turn_to_point(21.9, -30, 0, 6, 5, 350, 450); //turn to three pile
   //straightline_to_pose(21.9, -30, 8, 6, 1, 500, 650); //drive to three pile
-  chassis.drive_to_point(22.3, -22.4, 0, 8, 6, 1, 500, 650); //drive to three pile, -27
-  chassis.turn_to_point(11.5, -13.7, 0, 5, 0.5, 350, 500); //turn to low goal
-  straightline_to_pose(11.5, -13.7, 12, 3, 0.5, 450, 650); //drive to low goal
+  chassis.turn_to_point(22.3, -22,0);
+  chassis.drive_to_point(22.3, -22., 0, 8, 6, 1, 500, 650); //drive to three pile, -27
+  chassis.turn_to_point(11., -11.7, 0, 5, 0.5, 350, 500); //turn to low goal
+  straightline_to_pose(11., -11.7, 12, 3, 0.5, 450, 650); //drive to low goal
   intake_lift = true;
   Intake.spin(forward);
   chassis.drive_distance(1.05, 0, 3, 0, 2, 80, 100);
@@ -107,21 +104,21 @@ void skills() {
   chassis.drive_distance(-20, 0, 6, 0, 2, 380, 470); //back away from low goal
   Intake.spin(reverse, 12.7, volt);
   intake_lift = false;
-  chassis.turn_to_point(42., -45.3, 0, 7, 5, 400, 520);
+  chassis.turn_to_point(42.7, -45.3, 0, 7, 5, 400, 520);
   matchloader_down = true;
   Intake.spin(forward, 12.7, volt);
-  straightline_to_pose(42., -45.3, 8, 10, 0.1, 550, 650); //drive to matchloader 1
+  straightline_to_pose(42.7, -45.3, 8, 10, 0.1, 550, 650); //drive to matchloader 1
   chassis.turn_to_angle(180, 8, 1, 250, 300); //turn to matchloader 1
   //straightline_to_pose(45.5, -65.3, 8, 3, 1, 350, 400);
   chassis.drive_distance(17, 180, 10, 6, 3, 350, 400);
 
   hood_down = true;
-  chassis.drive_distance(15, 180, 3, 6, 3, 800, 1200); //stay to intake
+  chassis.drive_distance(12, 180, 3, 6, 3, 800, 1200); //stay to intake
   chassis.drive_distance(-10, 180, 10, 6, 3, 300, 350);
   matchloader_down = false;
-  chassis.drive_to_point(54.8, -30, 0, 5, 6, 7, 500, 650); //back to right of goal
+  chassis.drive_to_point(55., -30, 0, 5, 6, 7, 500, 650); //back to right of goal
   chassis.turn_to_angle(180, 8, 1, 300, 380);
-  straightline_to_pose(54.8, 30, 10, 0, 1, 800, 920, true);
+  straightline_to_pose(55., 30, 10, 0, 1, 800, 920, true);
   horizontalResetPosition();
   //chassis.drive_to_point(45.2, 36, 4, 5, 6, 7, 800, 1000);
   chassis.turn_to_point(49.5, 39, 180, 8, 1, 300, 340); //turn to goal 1 alignment point
@@ -143,7 +140,7 @@ void skills() {
 
   hood_down = true;
   Intake.spin(forward, 12.7, volt);
-  chassis.drive_distance(20, 1, 3, 6, 3, 800, 1400); //stay to intake, originally 15
+  chassis.drive_distance(15, 1, 3, 6, 3, 800, 1400); //stay to intake, originally 15
   straightline_to_pose(48, 18, 6, 1, 1, 500, 600, true); //approach long goal 2nd time
   chassis.drive_distance(-6, 0, 5, 0, 1, 100, 150); 
   hood_down = false;

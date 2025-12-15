@@ -3,8 +3,8 @@
 
 bool intake_is_running = false;
 
-double highVolt = 3;
-double lowVolt = 4.58;
+double highVolt = 3.8;//3
+double lowVolt = 4.90;//4.58
 bool selVolt = false;
 
 void scoreTopGoal (double speed, const vex::voltageUnits unit){
@@ -43,7 +43,7 @@ void scoreLowSkills() {
 
 void scoreHighSkills() {
   IntakeTop.spin(reverse, highVolt, volt); //6
-  IntakeMid.spin(forward, 4, volt); //10
+  IntakeMid.spin(forward, 5., volt); //10
   IntakeBottom.spin(forward, 8, volt);
   
 }

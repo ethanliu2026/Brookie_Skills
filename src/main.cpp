@@ -308,6 +308,9 @@ void pre_auton() {
     Brain.Screen.printAt(5, 180, "x, y:");
     Brain.Screen.printAt(5, 200, "%f", chassis.get_X_position());
     Brain.Screen.printAt(5, 220, "%f", chassis.get_Y_position());
+    Brain.Screen.printAt(5, 240, "back, left:");
+    //Brain.Screen.printAt(5, 260, "%f", );
+
     task::sleep(10);
   } 
 }
