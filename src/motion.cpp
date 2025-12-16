@@ -247,7 +247,7 @@ void horizontalResetPosition() {
   float backActual = BackDist.value() / 25.4;
   float leftActual = LeftDist.value() / 25.4;
   
-  if (Heading > 350 && Heading < 10) {
+  if (Heading > -10 && Heading < 10 || Heading > 350 && Heading < 370) {
     float correctedX = (-72) + (leftActual + sideDistPos);
     chassis.set_coordinates(correctedX, YCoord, Heading);
   } else if (Heading > 170 && Heading < 190) {
