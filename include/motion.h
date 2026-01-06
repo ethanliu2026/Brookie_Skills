@@ -32,3 +32,4 @@ void resetPositionQuad3(float backSensorReading, float leftSensorReading, float 
 void resetPositionQuad4(float backSensorReading, float leftSensorReading, float Heading);
 void autoResetPosition();
 void horizontalResetPosition();
+void rightHorizontalResetPosition();
