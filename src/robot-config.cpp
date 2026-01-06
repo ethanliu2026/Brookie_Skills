@@ -31,6 +31,7 @@ digital_out MatchLoader = digital_out(Brain.ThreeWirePort.C);
 distance SortDist = distance(PORT12);
 distance LeftDist = distance(PORT6);
 distance BackDist = distance(PORT10);
+distance rightDist = distance(PORT9);
 optical SortOptical = optical(PORT8);
 inertial IMU = inertial(PORT4);
 bool sort = false;

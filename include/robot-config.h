@@ -20,6 +20,7 @@ extern rotation RS;
 extern distance SortDist;
 extern distance BackDist;
 extern distance LeftDist;
+extern distance rightDist;
 extern optical SortOptical;
 extern digital_out Hood;
 extern digital_out LeftHook;

@@ -25,7 +25,7 @@ float verticalDifference;
 
 /* DISTANCE RESET */
 
-float sideDistPos = 2.9; //previously 3.7
+float sideDistPos = 3.4; //previously 3.7
 float backDistPos = 3.3; //previously 3.0
 
 void updateQuadrant(float x, float y) {
@@ -248,10 +248,10 @@ void horizontalResetPosition() {
   float leftActual = LeftDist.value() / 25.4;
   
   if (Heading > -10 && Heading < 10 || Heading > 350 && Heading < 370) {
-    float correctedX = (-72) + (leftActual + sideDistPos);
+    float correctedX = (-71) + (leftActual + sideDistPos);
     chassis.set_coordinates(correctedX, YCoord, Heading);
   } else if (Heading > 170 && Heading < 190) {
-    float correctedX = 72 - (leftActual + sideDistPos);
+    float correctedX = 71 - (leftActual + sideDistPos);
     chassis.set_coordinates(correctedX, YCoord, Heading);
   } else {
     float correctedX = XCoord;
@@ -259,6 +259,25 @@ void horizontalResetPosition() {
   }
 }
 
+void rightHorizontalResetPosition() {
+  XCoord = chassis.get_X_position();
+  YCoord = chassis.get_Y_position();
+  Heading = chassis.get_absolute_heading();
+  chassis.drive_stop(brake);
+
+  float rightActual = rightDist.value() / 25.4;
+
+  if (Heading > -10 && Heading < 10 || Heading > 350 && Heading < 370) {
+    float correctedX = (71) - (rightActual + 2.9);
+    chassis.set_coordinates(correctedX, YCoord, Heading);
+  } else if (Heading > 170 && Heading < 190) {
+    float correctedX = (-71) + (rightActual + 2.9);
+    chassis.set_coordinates(correctedX, YCoord, Heading);
+  } else {
+    float correctedY = YCoord;
+    chassis.set_coordinates(XCoord, correctedY, Heading);
+  }
+}
 
 /* ODOM MOTIONS */
 
