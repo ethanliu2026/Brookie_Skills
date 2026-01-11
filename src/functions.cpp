@@ -4,7 +4,7 @@
 bool intake_is_running = false;
 
 double highVolt = 3.71;//3
-double lowVolt = 4.35 ;//4.9, 4.58
+double lowVolt = 4.3 ;//4.9, 4.58
 bool selVolt = false;
 
 void scoreTopGoal (double speed, const vex::voltageUnits unit){

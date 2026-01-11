@@ -279,6 +279,25 @@ void rightHorizontalResetPosition() {
   }
 }
 
+void verticalResetPosition() {
+  XCoord = chassis.get_X_position();
+  YCoord = chassis.get_Y_position();
+  Heading = chassis.get_absolute_heading();
+
+  float backActual = BackDist.value() / 25.4;
+
+  if (Heading > -10 && Heading < 10 || Heading > 350 && Heading < 370) {
+    float correctedY = (-71) + (backActual + backDistPos);
+    chassis.set_coordinates(XCoord, correctedY, Heading);
+  } else if (Heading > 170 && Heading < 190) {
+    float correctedY = (71) - (backActual + backDistPos);
+    chassis.set_coordinates(XCoord, correctedY, Heading);
+  } else {
+    float correctedY = YCoord;
+    chassis.set_coordinates(XCoord, correctedY, Heading);
+  }
+}
+
 /* ODOM MOTIONS */
 
 void straightline_to_pose(float x, float y, float driveVolt, float headingVolt, int settleError, int settleTime, int Timeout, bool negative) {
