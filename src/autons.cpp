@@ -93,11 +93,12 @@ void skills() {
   chassis.turn_to_point(23.3, -22.5, 0);
   straightline_to_pose(23.3, -22.5, 8, 3, 0.5, 500, 650);
   //chassis.drive_to_point(22.3, -22., 0, 8, 6, 0.5, 500, 650); //drive to three pile, -27
-  chassis.turn_to_point(11.3, -9.1, 0, 5, 0.5, 350, 500); //turn to low goal
-  straightline_to_pose(11.3, -9.1, 12, 3, 0.5, 450, 650); //drive to low goal
+  chassis.turn_to_point(11.3, -10.1, 0, 5, 0.5, 350, 500); //turn to low goal
+  straightline_to_pose(11.3, -10.1, 12, 3, 0.5, 450, 650); //drive to low goal
   intake_lift = true;
-  //chassis.drive_distance(0.5, 0, 3, 0, 2, 80, 100);
+  chassis.drive_distance(0.9, 0, 3, 0, 2, 80, 100);
   IntakeBottom.spin(reverse, 11, volt);
+  chassis.drive_distance(-0.8, 0, 3, 0, 2, 80, 100);
   IntakeMid.spin(reverse, 11, volt);
   wait(300, msec); //350
   scoreLowSkills();
@@ -134,9 +135,9 @@ void skills() {
   chassis.set_coordinates(48, 27, chassis.get_absolute_heading());
   matchloader_down = true;
   //chassis.turn_to_angle(0);
+  hood_down = true;
   straightline_to_pose(47.7, 56, 7, 6, 1, 400, 500); //drive to first matchloader
 
-  hood_down = true;
   Intake.spin(forward, 12.7, volt);
   chassis.drive_distance(12, 1, 3, 6, 3, 600, 1100); //stay to intake, originally 15
   straightline_to_pose(48, 18, 6, 1, 1, 500, 600, true); //approach long goal 2nd time
