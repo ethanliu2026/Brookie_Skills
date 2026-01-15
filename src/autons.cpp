@@ -90,8 +90,8 @@ void skills() {
   wait(300, msec);
   //chassis.turn_to_point(21.9, -30, 0, 6, 5, 350, 450); //turn to three pile
   //straightline_to_pose(21.9, -30, 8, 6, 1, 500, 650); //drive to three pile
-  chassis.turn_to_point(25.3, -23.,0);
-  straightline_to_pose(25.3, -23., 8, 3, 0.5, 500, 650);
+  chassis.turn_to_point(23.3, -22.5, 0);
+  straightline_to_pose(23.3, -22.5, 8, 3, 0.5, 500, 650);
   //chassis.drive_to_point(22.3, -22., 0, 8, 6, 0.5, 500, 650); //drive to three pile, -27
   chassis.turn_to_point(11.3, -9.1, 0, 5, 0.5, 350, 500); //turn to low goal
   straightline_to_pose(11.3, -9.1, 12, 3, 0.5, 450, 650); //drive to low goal
@@ -123,6 +123,7 @@ void skills() {
   straightline_to_pose(59.8, 30.7, 10, 0, 1, 800, 920, true);
   //chassis.drive_to_point(45.2, 36, 4, 5, 6, 7, 800, 1000);
   verticalResetPosition();
+  horizontalResetPosition();
   chassis.turn_to_point(48, 39, 180, 8, 1, 300, 340); //turn to goal 1 alignment point
   straightline_to_pose(48, 39, 8, 8, 1, 400, 500, true);
   chassis.turn_to_angle(0, 7, 1, 300, 500);
@@ -145,7 +146,7 @@ void skills() {
   Intake.stop();
   matchloader_down = false;
   chassis.drive_distance(6, 0, 10, 0, 1, 200, 300);
-  chassis.drive_to_point(-1, 35, 0, 8, 6, .1, 1100, 1250); //drive to parking zone 2
+  chassis.drive_to_point(0, 35, 0, 8, 6, .1, 1100, 1250); //drive to parking zone 2
   chassis.turn_to_angle(0, 10, 1, 280, 350);
   straightline_to_pose(0, 47.2, 10, 4, 0.1, 400, 500); //700
   hood_down = true;
@@ -190,14 +191,14 @@ void skills() {
   Intake.stop();
   matchloader_down = false;
   chassis.drive_distance(20, 0, 10, 0, 1, 300, 400);
-  chassis.drive_to_point(-57.8, 40, 0, 5, 6, 7, 600, 700); //back to right of goal
+  chassis.drive_to_point(-57, 40, 0, 5, 6, 7, 600, 700); //back to right of goal
   chassis.turn_to_angle(0, 7, 1, 300, 400);
-  straightline_to_pose(-56., -29, 10, 1, 1, 800, 950, true);
+  straightline_to_pose(-57., -29, 10, 1, 1, 800, 950, true);
   verticalResetPosition();
   horizontalResetPosition();
 
-  chassis.turn_to_point(-48., -39, 180, 8, 1, 300, 340);
-  straightline_to_pose(-48., -39, 8, 8, 1, 400, 500, true); 
+  chassis.turn_to_point(-48., -42, 180, 8, 1, 300, 340);
+  straightline_to_pose(-48., -42, 8, 8, 1, 400, 500, true); 
   
   
   matchloader_down = true;
