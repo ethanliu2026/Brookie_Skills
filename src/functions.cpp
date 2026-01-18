@@ -98,6 +98,8 @@ void startRedAutonTasks() {
   //intake_lift = false;
 }
 
+
+
 std::string getColorSortState(){
     if (toggle_blue_sort && !toggle_red_sort) {
         return "BLUE";
