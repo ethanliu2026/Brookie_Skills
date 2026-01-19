@@ -1,3 +1,4 @@
+#include "tasks.h"
 #include "vex.h"
 #include "vex_global.h"
 
@@ -12,6 +13,27 @@ void scoreTopGoal (double speed, const vex::voltageUnits unit){
   IntakeMid.spin(forward, speed, unit);
   IntakeBottom.spin(forward, speed, unit);
   intake_is_running = true;
+}
+
+void scoreTopGoal(double time){
+  hood_down = false;
+  IntakeTop.spin(forward, 12.7, volt);
+  IntakeMid.spin(forward, 12.7, volt);
+  IntakeBottom.spin(forward, 12.7, volt);
+  intake_is_running = true;
+  wait(100, msec);
+  timer t;
+  
+  while(t.time(msec) < time){
+    if (IntakeMid.velocity(rpm) < 10 || IntakeBottom.velocity(rpm) < 10) {
+      Intake.spin(reverse, 12.7, volt);
+      wait(50, msec);
+      Intake.spin(forward, 12.7, volt);
+      wait(50, msec);
+  }   
+  wait(10, msec);
+  }
+  Intake.stop();
 }
 
 void scoreMiddleGoal (double speed, const vex::voltageUnits unit){

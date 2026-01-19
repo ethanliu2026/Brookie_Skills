@@ -248,9 +248,13 @@ int rc_auto_loop_function_Controller1() {
           }
       
       if(Controller1.ButtonA.pressing()) {
+        scoreTopGoal(1500);
+        /*
         Hood.set(!(Hood.value()));
         hood_down = !hood_down;
         vexDelay(250);
+        */
+        
       }
       IntakeLiftClamp = Controller1.ButtonA.pressing();
 
