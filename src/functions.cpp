@@ -5,7 +5,7 @@
 bool intake_is_running = false;
 
 double highVolt = 3.71;//3
-double lowVolt = 4.23 ;//4.9, 4.58
+double lowVolt = 4 ;//4.9, 4.58
 bool selVolt = false;
 
 void scoreTopGoal (double speed, const vex::voltageUnits unit){
@@ -23,7 +23,7 @@ void scoreTopGoal(double time){
   intake_is_running = true;
   wait(100, msec);
   timer t;
-  
+  //chassis.drive_distance(-100, 0, 1, 0, 3, time-100, time);
   while(t.time(msec) < time){
     if (IntakeMid.velocity(rpm) < 10 || IntakeBottom.velocity(rpm) < 10) {
       Intake.spin(reverse, 12.7, volt);
@@ -59,7 +59,7 @@ void storeBall (double speed, const vex::voltageUnits unit){
 
 void scoreLowSkills() {
   IntakeBottom.spin(reverse, lowVolt, volt);
-  IntakeMid.spin(reverse, 9, volt);
+  IntakeMid.spin(reverse, 8.7, volt);
   IntakeTop.spin(reverse, 7, volt);
 }
 
