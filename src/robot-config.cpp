@@ -51,7 +51,7 @@ int rc_auto_loop_function_Controller1() {
   // process the controller input every 20 milliseconds
   // update the motors based on the input values
   startDriverTasks();
-  LeftHook.set(true);
+  LeftHook.set(false);
   while(true) {
     SortOptical.integrationTime(5);
     SortOptical.setLight(vex::ledState::on);
@@ -248,7 +248,24 @@ int rc_auto_loop_function_Controller1() {
           }
       
       if(Controller1.ButtonA.pressing()) {
-        scoreTopGoal(1500);
+        intake_lift = true;
+  //chassis.drive_distance(1, 0, 3, 0, 0.2, 80, 100);
+      /*IntakeBottom.spin(reverse, 7, volt);
+      chassis.drive_distance(-0.6, 0, 5, 0, 1, 370, 380);
+      chassis.drive_stop(brake);
+      IntakeMid.spin(reverse, 8, volt);
+      wait(300, msec); //350
+      scoreLowSkills();
+      wait(2200, msec); //2680
+      Intake.spin(forward, 4, volt);
+      wait(300, msec);
+      scoreLowSkills();
+      wait(400, msec); 
+      IntakeBottom.spin(reverse, 2, volt);
+      IntakeMid.spin(reverse, 5, volt);
+      IntakeTop.spin(reverse, 7, volt);*/
+      
+      wait(1100, msec);
         /*
         Hood.set(!(Hood.value()));
         hood_down = !hood_down;
