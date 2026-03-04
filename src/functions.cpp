@@ -4,58 +4,10 @@
 
 bool intake_is_running = false;
 
+/*
 double highVolt = 3.71;//3
 double lowVolt = 4 ;//4.9, 4.58
 bool selVolt = false;
-
-void scoreTopGoal (double speed, const vex::voltageUnits unit){
-  IntakeTop.spin(forward, speed, unit);
-  IntakeMid.spin(forward, speed, unit);
-  IntakeBottom.spin(forward, speed, unit);
-  intake_is_running = true;
-}
-
-void scoreTopGoal(double time){
-  hood_down = false;
-  IntakeTop.spin(forward, 12.7, volt);
-  IntakeMid.spin(forward, 12.7, volt);
-  IntakeBottom.spin(forward, 12.7, volt);
-  intake_is_running = true;
-  wait(100, msec);
-  timer t;
-  //chassis.drive_distance(-100, 0, 1, 0, 3, time-100, time);
-  while(t.time(msec) < time){
-    if (IntakeMid.velocity(rpm) < 10 || IntakeBottom.velocity(rpm) < 10) {
-      Intake.spin(reverse, 12.7, volt);
-      wait(50, msec);
-      Intake.spin(forward, 12.7, volt);
-      wait(50, msec);
-  }   
-  wait(10, msec);
-  }
-  Intake.stop();
-}
-
-void scoreMiddleGoal (double speed, const vex::voltageUnits unit){
-  IntakeTop.spin(reverse, speed, unit);
-  IntakeMid.spin(forward, speed, unit);
-  IntakeBottom.spin(forward, speed, unit);
-  intake_is_running = true;
-}
-
-void scoreMiddleGoal (double speedTop, double speedMid, double speedBottom, const vex::voltageUnits unit){
-  IntakeTop.spin(reverse, speedTop, unit);
-  IntakeMid.spin(forward, speedMid, unit);
-  IntakeBottom.spin(forward, speedBottom, unit);
-  intake_is_running = true;
-}
-
-void storeBall (double speed, const vex::voltageUnits unit){
-  hood_down = true;
-  IntakeTop.spin(forward, speed, unit);
-  IntakeMid.spin(reverse, speed, unit);
-  IntakeBottom.spin(reverse, speed, unit);
-}
 
 void scoreLowSkills() {
   IntakeBottom.spin(reverse, lowVolt, volt);
@@ -69,10 +21,97 @@ void scoreHighSkills() {
   IntakeBottom.spin(forward, 8, volt);
   
 }
+*/
+
+void scoreTopGoal (double speed, const vex::voltageUnits unit){
+  UpperIntakeLift.set(false);
+  hood_down = false;
+  Hood.set(true);
+  IntakeTop.spin(forward, speed, unit);
+  IntakeBottom.spin(forward, speed, unit);
+  intake_is_running = true;
+}
+
+void scoreTopGoal(double time){
+  UpperIntakeLift.set(false);
+  hood_down = false;
+  Hood.set(true);
+  IntakeTop.spin(forward, 12.7, volt);
+  IntakeBottom.spin(forward, 12.7, volt);
+  intake_is_running = true;
+  wait(50, msec);
+  timer t;
+  
+  while(t.time(msec) < time){
+    if (IntakeBottom.velocity(rpm) < 10) {
+      Intake.spin(reverse, 12.7, volt);
+      wait(50, msec);
+      Intake.spin(forward, 12.7, volt);
+      wait(50, msec);
+  }   
+  wait(10, msec);
+  }
+  Intake.stop();
+}
+
+void scoreMiddleGoal (double speed, const vex::voltageUnits unit){
+  UpperIntakeLift.set(true);
+  Hood.set(false);
+  hood_down = false;
+  IntakeTop.spin(forward, speed, unit);
+  IntakeBottom.spin(forward, speed, unit);
+  intake_is_running = true;
+}
+
+void scoreMiddleGoal (double speedTop, double speedMid, double speedBottom, const vex::voltageUnits unit){
+  UpperIntakeLift.set(true);
+  Hood.set(false);
+  hood_down = false;
+  IntakeTop.spin(forward, speedTop, unit);
+  IntakeBottom.spin(forward, speedBottom, unit);
+  intake_is_running = true;
+}
+
+void scoreLowGoal (double speed, const vex::voltageUnits unit){
+  UpperIntakeLift.set(false);
+  hood_down = true;
+  intake_lift = true;
+  IntakeTop.spin(reverse, speed, unit);
+  IntakeBottom.spin(reverse, speed, unit);
+  intake_is_running = true;
+}
+
+void scoreLowGoal (double t){
+  UpperIntakeLift.set(false);
+  hood_down = true;
+  intake_lift = true;
+  IntakeTop.spin(reverse, 7, volt);
+  IntakeBottom.spin(reverse, 4.5, volt);
+  intake_is_running = true;
+  wait(t, msec);
+}
+
+void storeBall (double speed, const vex::voltageUnits unit){
+  UpperIntakeLift.set(false);
+  Hood.set(true);
+  hood_down = true;
+  left_shoulder_not_pressed = false;
+  Intake.spin(forward, 12.7, volt);
+  LowerIntakeLift.set(false);
+  intake_lift = false;
+}
 
 void startDriverTasks() {
   auto_started = false;
-  antiJam.suspend();
+  OdomLift.set(true);
+  MatchLoader.set(false);
+  LeftHook.set(false);
+  LowerIntakeLift.set(false);
+  UpperIntakeLift.set(false);
+  chassis.Gyro.startCalibration();
+  while(chassis.Gyro.isCalibrating()) {
+  wait(10, msec);
+}
   blueSort.suspend();
   redSort.suspend();
   controllerRumble.resume();
@@ -89,7 +128,6 @@ void startDriverTasks() {
 
 void startBlueAutonTasks() {
   auto_started = true;
-  antiJam.resume();
   blueSort.resume();
   redSort.suspend();
   hoodAuton.resume();
@@ -104,7 +142,6 @@ void startBlueAutonTasks() {
 
 void startRedAutonTasks() {
   auto_started = true;
-  antiJam.suspend();
   blueSort.suspend();
   redSort.resume();
   hoodAuton.resume();
@@ -117,10 +154,7 @@ void startRedAutonTasks() {
   red_alliance = true;
   matchloader_down = false;
   hood_down = false;
-  //intake_lift = false;
 }
-
-
 
 std::string getColorSortState(){
     if (toggle_blue_sort && !toggle_red_sort) {
@@ -135,4 +169,20 @@ std::string getColorSortState(){
     } else {
         return "ERROR"; 
     }
+}
+
+void hoodCloseDelay(int delayTime){
+  wait(delayTime, msec);
+  hood_down = true;
+}
+
+void autoAlign() {
+  chassis.set_coordinates(48, -27, 180);
+  //chassis.turn_to_angle(230);
+  //chassis.drive_distance(10, chassis.get_absolute_heading(), 5, 0, 1, 60, 700);
+  //chassis.set_coordinates(48, -27, 180);
+  chassis.turn_to_point(30, 30, 0, 10, 1, 400, 500);
+  straightline_to_pose(30, -30, 12, 12, 1, 900, 1000);
+  chassis.turn_to_angle(180, 10, 1, 400, 500);
+  wait(1000, msec);
 }

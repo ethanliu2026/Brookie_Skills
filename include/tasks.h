@@ -31,6 +31,7 @@ int colorBlueSortTask();
 int colorRedSortTask();
 int rumbleTask();
 int autonControllerTask();
+int driveControllerTask();
 int matchLoaderTask();
 int hoodTask();
 
@@ -43,3 +44,4 @@ extern vex::task autonControllerDisplay;
 extern vex::task matchloaderAuton;
 extern vex::task hoodAuton;
 extern vex::task intakeLift;
+extern vex::task driveControllerDisplay;

@@ -9,10 +9,11 @@ void getDistanceDifference(float desiredHorizontal, float desiredVertical);
 void straightline_to_pose(float x, float y, float driveVolt, float headingVolt, int settleError, int settleTime, int Timeout);
 void straightline_to_pose(float x, float y, float driveVolt, float headingVolt, int settleError, int settleTime, int Timeout, bool negative);
 void straightline_to_pose(float x, float y, float driveVolt);
+void auto_straightline_to_pose(float x, float y, float driveVolt, float headingVolt, int settleError, int settleTime, int Timeout);
 float get_hypot(float desiredX, float desiredY, float actualX, float actualY);
 float get_heading(float desiredX, float desiredY, float actualX, float actualY);
-float getYDesired(float vertical);
-float getXDesired(float horizontal);
+
+
 void updateQuadrant(float x, float y);
 void updateHeading(float heading);
 float getCorrectedX(float backSensorReading, float leftSensorReading);
@@ -32,5 +33,12 @@ void resetPositionQuad3(float backSensorReading, float leftSensorReading, float 
 void resetPositionQuad4(float backSensorReading, float leftSensorReading, float Heading);
 void autoResetPosition();
 void horizontalResetPosition();
+void resetPositionSolo();
+void swing_to_pose(float x, float y, float swingVolt, int settleError, int settleTime, int Timeout, int direction);
+
 void rightHorizontalResetPosition();
-void verticalResetPosition();
+void backLeftResetPosition();
+void backRightResetPosition();
+
+void drive_time(float voltage, int timeMs);
+void drive_side(int side, float voltage, int timeMs); // side: 0 = left, 1 = right

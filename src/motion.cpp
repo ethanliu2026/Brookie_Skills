@@ -25,8 +25,9 @@ float verticalDifference;
 
 /* DISTANCE RESET */
 
-float sideDistPos = 3.4; //previously 3.7
-float backDistPos = 3.3; //previously 3.0
+float leftDistPos = 3;//previously 3.7
+float backDistPos = 4.54724409; //previously 3.0
+float rightDistPos = 2.3; //previously 3.5
 
 void updateQuadrant(float x, float y) {
   if (x > 0 && y > 0) {
@@ -90,13 +91,13 @@ void updateHeading(float heading) {
 
 float getCorrectedX(float backSensorReading, float leftSensorReading) {
   if(facing_blue) {
-      return (leftSensorReading + sideDistPos) - FAR_DIST;
+      return (leftSensorReading + leftDistPos) - FAR_DIST;
   }
   else if(facing_right) {
       return (backSensorReading + backDistPos) - FAR_DIST;
   }
   else if(facing_red) {
-      return FAR_DIST - (leftSensorReading + sideDistPos); 
+      return FAR_DIST - (leftSensorReading + leftDistPos); 
   }
   else if(facing_left) {
       return FAR_DIST - (backSensorReading + backDistPos);
@@ -109,13 +110,13 @@ float getCorrectedY(float backSensorReading, float leftSensorReading) {
       return (backSensorReading + backDistPos) - FAR_DIST;
   }
   else if(facing_right) {
-      return FAR_DIST - (leftSensorReading + sideDistPos);
+      return FAR_DIST - (leftSensorReading + leftDistPos);
   }
   else if(facing_red) {
       return FAR_DIST - (backSensorReading + backDistPos);
   }
   else if(facing_left) {
-      return (leftSensorReading + sideDistPos) - FAR_DIST;
+      return (leftSensorReading + leftDistPos) - FAR_DIST;
   }
   return YCoord;
 }
@@ -145,7 +146,7 @@ void resetPositionSkills() {
 
 //reset position by quadrant, since only left and back sensor, find the correct corner for closest walls
 float resetXPositionQuad1 (float backSensorReading, float leftSensorReading) {
-  return FAR_DIST - (leftSensorReading + sideDistPos);
+  return FAR_DIST - (leftSensorReading + leftDistPos);
 }
 
 float resetYPositionQuad1 (float backSensorReading, float leftSensorReading) {
@@ -163,7 +164,7 @@ float resetXPositionQuad2 (float backSensorReading, float leftSensorReading) {
 }
 
 float resetYPositionQuad2 (float backSensorReading, float leftSensorReading) {
-  return FAR_DIST - (leftSensorReading + sideDistPos);
+  return FAR_DIST - (leftSensorReading + leftDistPos);
 }
 
 void resetPositionQuad2 (float backSensorReading, float leftSensorReading, float Heading) {
@@ -173,7 +174,7 @@ void resetPositionQuad2 (float backSensorReading, float leftSensorReading, float
 }
 
 float resetXPositionQuad3 (float backSensorReading, float leftSensorReading) {
-  return (leftSensorReading + sideDistPos) - FAR_DIST;
+  return (leftSensorReading + leftDistPos) - FAR_DIST;
 }
 
 float resetYPositionQuad3 (float backSensorReading, float leftSensorReading) {
@@ -191,7 +192,7 @@ float resetXPositionQuad4 (float backSensorReading, float leftSensorReading) {
 }
 
 float resetYPositionQuad4 (float backSensorReading, float leftSensorReading) {
-  return (leftSensorReading + sideDistPos) - FAR_DIST;
+  return (leftSensorReading + leftDistPos) - FAR_DIST;
 }
 
 void resetPositionQuad4 (float backSensorReading, float leftSensorReading, float Heading) {
@@ -238,6 +239,19 @@ void autoResetPosition() {
   }
 }
 
+void resetPositionSolo(){
+  Heading = chassis.get_absolute_heading();
+
+
+  float backActual = BackDist.value() / 25.4;
+  float rightActual = rightDist.value() / 25.4;
+      float correctedY = (-71) + (rightActual + rightDistPos);
+      float correctedX = (-71) + (backActual + backDistPos);
+      chassis.set_coordinates(correctedX, correctedY, Heading);
+
+
+}
+
 void horizontalResetPosition() {
   XCoord = chassis.get_X_position();
   YCoord = chassis.get_Y_position();
@@ -247,16 +261,34 @@ void horizontalResetPosition() {
   float backActual = BackDist.value() / 25.4;
   float leftActual = LeftDist.value() / 25.4;
   
-  if (Heading > -10 && Heading < 10 || Heading > 350 && Heading < 370) {
-    float correctedX = (-71) + (leftActual + sideDistPos);
+  if (Heading > 350 && Heading < 370 || Heading > -10 && Heading < 10) {
+    float correctedX = (-71) + (leftActual + leftDistPos);
     chassis.set_coordinates(correctedX, YCoord, Heading);
   } else if (Heading > 170 && Heading < 190) {
-    float correctedX = 71 - (leftActual + sideDistPos);
+    float correctedX = 71 - (leftActual + leftDistPos);
     chassis.set_coordinates(correctedX, YCoord, Heading);
   } else {
     float correctedX = XCoord;
     chassis.set_coordinates(correctedX, YCoord, Heading);
   }
+}
+
+void backLeftResetPosition() {
+  Heading = chassis.get_absolute_heading();
+  float backActual = BackDist.value() / 25.4;
+  float leftActual = LeftDist.value() / 25.4;
+  float correctedX = FAR_DIST - (leftActual + leftDistPos);
+  float correctedY = FAR_DIST - (backActual + backDistPos);
+  chassis.set_coordinates(correctedX, correctedY, Heading);
+}
+
+void backRightResetPosition() {
+  Heading = chassis.get_absolute_heading();
+  float backActual = BackDist.value() / 25.4;
+  float leftActual = rightDist.value() / 25.4;
+  float correctedX = - FAR_DIST + (leftActual + rightDistPos);
+  float correctedY = FAR_DIST - (backActual + backDistPos);
+  chassis.set_coordinates(correctedX, correctedY, Heading);
 }
 
 void rightHorizontalResetPosition() {
@@ -268,30 +300,11 @@ void rightHorizontalResetPosition() {
   float rightActual = rightDist.value() / 25.4;
 
   if (Heading > -10 && Heading < 10 || Heading > 350 && Heading < 370) {
-    float correctedX = (71) - (rightActual + 2.9);
+    float correctedX = (71) - (rightActual + rightDistPos);
     chassis.set_coordinates(correctedX, YCoord, Heading);
   } else if (Heading > 170 && Heading < 190) {
-    float correctedX = (-71) + (rightActual + 2.9);
+    float correctedX = (-71) + (rightActual + rightDistPos);
     chassis.set_coordinates(correctedX, YCoord, Heading);
-  } else {
-    float correctedY = YCoord;
-    chassis.set_coordinates(XCoord, correctedY, Heading);
-  }
-}
-
-void verticalResetPosition() {
-  XCoord = chassis.get_X_position();
-  YCoord = chassis.get_Y_position();
-  Heading = chassis.get_absolute_heading();
-
-  float backActual = BackDist.value() / 25.4;
-
-  if (Heading > -10 && Heading < 10 || Heading > 350 && Heading < 370) {
-    float correctedY = (-71) + (backActual + backDistPos);
-    chassis.set_coordinates(XCoord, correctedY, Heading);
-  } else if (Heading > 170 && Heading < 190) {
-    float correctedY = (71) - (backActual + backDistPos);
-    chassis.set_coordinates(XCoord, correctedY, Heading);
   } else {
     float correctedY = YCoord;
     chassis.set_coordinates(XCoord, correctedY, Heading);
@@ -310,6 +323,46 @@ void straightline_to_pose(float x, float y, float driveVolt, float headingVolt, 
     }
 }
 
+void swing_to_pose(float x, float y, float swingVolt, int settleError, int settleTime, int Timeout, int direction) {
+    float actualX = chassis.get_X_position();
+    float actualY = chassis.get_Y_position();
+
+    if (direction == 1) {
+      chassis.left_swing_to_angle(get_heading(x, y, actualX, actualY), swingVolt, settleError, settleTime, Timeout, 0.37, 0.01, 2, 15);
+    } else if (direction == 0) {
+      chassis.right_swing_to_angle(get_heading(x, y, actualX, actualY), swingVolt, settleError, settleTime, Timeout, 0.37, 0.01, 2, 15);
+    }
+}
+
+float angle_difference(float target, float current) {
+        float diff = target - current;
+        while (diff > 180) diff -= 360;
+        while (diff < -180) diff += 360;
+        return diff;
+    }
+
+void auto_straightline_to_pose(float x, float y, float driveVolt, float headingVolt, int settleError, int settleTime, int Timeout) {
+    float actualX = chassis.get_X_position();
+    float actualY = chassis.get_Y_position();
+    float botHeading = chassis.get_absolute_heading();
+    float headingToPoint = get_heading(x, y, actualX, actualY);
+    float angleTol = 20;
+
+    
+   if (headingToPoint <= botHeading + angleTol && headingToPoint >= botHeading - angleTol) {
+        // Move forwards
+        chassis.drive_distance(get_hypot(x, y, actualX, actualY), headingToPoint, driveVolt, headingVolt, settleError, settleTime, Timeout);
+    } else if (headingToPoint >= botHeading + 180 - angleTol && headingToPoint <= botHeading + 180 + angleTol) {
+        // Move backwards
+        chassis.drive_distance(-get_hypot(x, y, actualX, actualY), headingToPoint + 180, driveVolt, headingVolt, settleError, settleTime, Timeout);
+    } else {
+        // Do not move
+    }
+
+    
+
+}
+
 void straightline_to_pose(float x, float y, float driveVolt, float headingVolt, int settleError, int settleTime, int Timeout) {
     float actualX = chassis.get_X_position();
     float actualY = chassis.get_Y_position();
@@ -324,6 +377,52 @@ void straightline_to_pose(float x, float y, float driveVolt) {
 
 }
 
+
+// Drives straight for a set time at a given voltage, with IMU heading correction
+void drive_time(float voltage, int timeMs) {
+    float targetHeading = chassis.get_absolute_heading();
+    float kP = 0.05; // heading correction gain, tune as needed
+    int elapsed = 0;
+    int dt = 10; // ms per loop
+
+    while (elapsed < timeMs) {
+        float headingError = targetHeading - chassis.get_absolute_heading();
+        while (headingError > 180)  headingError -= 360;
+        while (headingError < -180) headingError += 360;
+
+        float correction = kP * headingError;
+        LF.spin(forward, voltage + correction, volt);
+        LM.spin(forward, voltage + correction, volt);
+        LB.spin(forward, voltage + correction, volt);
+        RF.spin(forward, voltage - correction, volt);
+        RM.spin(forward, voltage - correction, volt);
+        RB.spin(forward, voltage - correction, volt);
+
+        wait(dt, msec);
+        elapsed += dt;
+    }
+
+    LF.stop(brake); LM.stop(brake); LB.stop(brake);
+    RF.stop(brake); RM.stop(brake); RB.stop(brake);
+}
+
+// Spins one side of the drivetrain at a given voltage for a set time
+// side: 0 = left, 1 = right
+void drive_side(int side, float voltage, int timeMs) {
+    if (side == 0) {
+        LF.spin(forward, voltage, volt);
+        LM.spin(forward, voltage, volt);
+        LB.spin(forward, voltage, volt);
+        wait(timeMs, msec);
+    } else if (side == 1) {
+        RF.spin(forward, voltage, volt);
+        RM.spin(forward, voltage, volt);
+        RB.spin(forward, voltage, volt);
+        wait(timeMs, msec);
+    }
+
+    chassis.drive_stop(brake);
+}
 
 float get_hypot(float desiredX, float desiredY, float actualX, float actualY) {
     float differenceX = desiredX - actualX;

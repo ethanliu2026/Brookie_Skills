@@ -33,25 +33,6 @@ int rumbleTask(){
 }
 
 /* STORING */
-int antiJamTask(){
-  while(1) {
-    if (IntakeTop.torque() > 0.6 && anti_jam){
-      IntakeTop.stop(coast);
-      wait(600, msec);
-      IntakeTop.spin(reverse, 100, volt);
-      wait(600, msec);
-      IntakeTop.stop(coast);
-    }
-    
-     if (IntakeMid.torque() > 0.6 && anti_jam){
-      IntakeMid.stop(coast);
-      wait(600, msec);
-      IntakeMid.spin(reverse, 100, volt);
-      wait(600, msec);
-      IntakeMid.stop(coast);
-     }
-    }
-}
 
 /* COLOR SORT */
 
@@ -90,20 +71,16 @@ int colorRedSortTask(){
   }
 
 int autonControllerTask(){
+  //Controller1.Screen.clearScreen();
   while(1){
     Controller1.Screen.setCursor(1,1);
-    
     Controller1.Screen.print("X:");
     Controller1.Screen.setCursor(1,4);
     Controller1.Screen.print(chassis.get_X_position());
     Controller1.Screen.setCursor(1,10);
     Controller1.Screen.print("Y:");
     Controller1.Screen.setCursor(1,13);
-    Controller1.Screen.print((chassis.get_Y_position()));
-    Controller1.Screen.setCursor(2,1);
-    Controller1.Screen.print("Sort:");
-    Controller1.Screen.setCursor(2,6);
-    Controller1.Screen.print(getColorSortState().c_str());
+    Controller1.Screen.print(chassis.get_Y_position());
     Controller1.Screen.setCursor(2,10);
     Controller1.Screen.print("Theta:");
     Controller1.Screen.setCursor(2,16);
@@ -115,6 +92,143 @@ int autonControllerTask(){
     task::sleep(20);
 
   } 
+}
+
+int driveControllerTask(){
+  while(1) {
+  /* DRIVE TEMP */
+    Controller1.Screen.setCursor(1,1);
+    Controller1.Screen.print("Drive: ");
+    Controller1.Screen.setCursor(1,8);
+    Controller1.Screen.print((RF.temperature(celsius)+RM.temperature(celsius)+RB.temperature(celsius)+LF.temperature(celsius)+LM.temperature(celsius)+LB.temperature(celsius))/6);
+
+    /* INTAKE TEMP */
+    Controller1.Screen.setCursor(1,14);
+    Controller1.Screen.print("Top:");
+    Controller1.Screen.setCursor(1, 19);
+    Controller1.Screen.print((int)(IntakeTop.temperature(celsius)+0.5));
+
+    Controller1.Screen.setCursor(2,1);
+    Controller1.Screen.print("Btm:");
+    Controller1.Screen.setCursor(2,6);
+    Controller1.Screen.print((int)(IntakeBottom.temperature(celsius)+0.5));
+
+    /* GYRO */
+    Controller1.Screen.setCursor(2,10);
+    Controller1.Screen.print("Gyro:");
+    Controller1.Screen.setCursor(2,16);
+    Controller1.Screen.print(chassis.get_absolute_heading());
+
+
+    /* AUTON SELECTION */
+    switch(current_auton_selection){
+      case 0:
+        Brain.Screen.printAt(5, 140, "Blue SOLO");
+        Controller1.Screen.clearLine(3);
+        Controller1.Screen.setCursor(3,1);
+        Controller1.Screen.print("AUTON:");
+        Controller1.Screen.setCursor(3,8);
+        Controller1.Screen.print("SOLO");
+        break;
+      case 1:
+        Brain.Screen.printAt(5, 140, "Red SOLO");
+        Controller1.Screen.clearLine(3);
+        Controller1.Screen.setCursor(3,1);
+        Controller1.Screen.print("AUTON:");
+        Controller1.Screen.setCursor(3,8);
+        Controller1.Screen.print("RNINE");
+        break;
+      case 2:
+        Brain.Screen.printAt(5, 140, "Blue LEFT Qual");
+        Controller1.Screen.clearLine(3);
+        Controller1.Screen.setCursor(3,1);
+        Controller1.Screen.print("AUTON:");
+        Controller1.Screen.setCursor(3,8);
+        Controller1.Screen.print("RFOUR");
+        break;
+      case 3:
+        Brain.Screen.printAt(5, 140, "Red LEFT Qual");
+        Controller1.Screen.clearLine(3);
+        Controller1.Screen.setCursor(3,1);
+        Controller1.Screen.print("AUTON:");
+        Controller1.Screen.setCursor(3,8);
+        Controller1.Screen.print("RSEVEN");
+        break;
+      case 4:
+        Brain.Screen.printAt(5, 140, "Blue RIGHT Qual");
+        Controller1.Screen.clearLine(3);
+        Controller1.Screen.setCursor(3,1);
+        Controller1.Screen.print("AUTON:");
+        Controller1.Screen.setCursor(3,8);
+        Controller1.Screen.print("LNINE");
+        break;
+      case 5:
+        Brain.Screen.printAt(5, 140, "Red RIGHT Qual");
+        Controller1.Screen.clearLine(3);
+        Controller1.Screen.setCursor(3,1);
+        Controller1.Screen.print("AUTON:");
+        Controller1.Screen.setCursor(3,8);
+        Controller1.Screen.print("LSEVEN");
+        break;
+      case 6:
+        Brain.Screen.printAt(5, 140, "Blue LEFT Elim");
+        Controller1.Screen.clearLine(3);
+        Controller1.Screen.setCursor(3,1);
+        Controller1.Screen.print("AUTON:");
+        Controller1.Screen.setCursor(3,8);
+        Controller1.Screen.print("LFOUR");
+        break;
+      case 7:
+        Brain.Screen.printAt(5, 140, "Red LEFT Elim");
+        Controller1.Screen.clearLine(3);
+        Controller1.Screen.setCursor(3,1);
+        Controller1.Screen.print("AUTON:");
+        Controller1.Screen.setCursor(3,8);
+        Controller1.Screen.print("RFOUR");
+        break;
+      case 8:
+        Brain.Screen.printAt(5, 140, "Blue RIGHT Elim");
+        Controller1.Screen.clearLine(3);
+        Controller1.Screen.setCursor(3,1);
+        Controller1.Screen.print("AUTON:");
+        Controller1.Screen.setCursor(3,8);
+        Controller1.Screen.print("BRE");
+        break;
+      case 9:
+        Brain.Screen.printAt(5, 140, "Red RIGHT Elim");
+        Controller1.Screen.clearLine(3);
+        Controller1.Screen.setCursor(3,1);
+        Controller1.Screen.print("AUTON:");
+        Controller1.Screen.setCursor(3,8);
+        Controller1.Screen.print("RRE");
+        break;
+      case 10:
+        Brain.Screen.printAt(5, 140, "SKILLS");
+        Controller1.Screen.clearLine(3);
+        Controller1.Screen.setCursor(3,1);
+        Controller1.Screen.print("AUTON:");
+        Controller1.Screen.setCursor(3,8);
+        Controller1.Screen.print("SKILLS");
+        break;
+      case 11:
+        Brain.Screen.printAt(5, 140, "PID");
+        Controller1.Screen.clearLine(3);
+        Controller1.Screen.setCursor(3,1);
+        Controller1.Screen.print("AUTON:");
+        Controller1.Screen.setCursor(3,8);
+        Controller1.Screen.print("PID");
+        break;
+      case 12:
+        Brain.Screen.printAt(5, 140, "ODOM");
+        Controller1.Screen.clearLine(3);
+        Controller1.Screen.setCursor(3,1);
+        Controller1.Screen.print("AUTON:");
+        Controller1.Screen.setCursor(3,8);
+        Controller1.Screen.print("ODOM");
+        break;
+    }
+  }
+    
 }
 
 int matchLoaderTask(){
@@ -130,9 +244,9 @@ int matchLoaderTask(){
 int hoodTask(){
   while(1){
     if(hood_down) {
-      Hood.set(true);
-    } else {
       Hood.set(false);
+    } else {
+      Hood.set(true);
     }  
   }
 }
@@ -140,18 +254,18 @@ int hoodTask(){
 int liftTask(){
   while(1){
     if(intake_lift) {
-      IntakeLift.set(true);
+      LowerIntakeLift.set(true);
     } else {
-      IntakeLift.set(false);
+      LowerIntakeLift.set(false);
     }  
   }
 }
 
-vex::task antiJam(antiJamTask);
 vex::task blueSort(colorBlueSortTask);
 vex::task redSort(colorRedSortTask);
 vex::task controllerRumble(rumbleTask);
 vex::task autonControllerDisplay(autonControllerTask);
+vex::task driveControllerDisplay(driveControllerTask);
 vex::task matchloaderAuton(matchLoaderTask);
 vex::task hoodAuton(hoodTask);
 vex::task intakeLift(liftTask);
