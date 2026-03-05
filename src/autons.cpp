@@ -575,8 +575,8 @@ void skills(){
   chassis.turn_to_angle(180, 8, 1, 250, 350);
   wait(200, msec);
   horizontalResetPosition();
-  straightline_to_pose(47, -60, 10, 6, 1, 350, 400);
-  drive_time(2, 1300);
+  straightline_to_pose(47, -60, 7, 6, 1, 350, 400);
+  drive_time(2, 1400);
   //chassis.drive_distance(15, 180, 2, 6, 3, 1000, 1200);
   chassis.drive_distance(-10, 180, 10, 6, 3, 300, 350);
   chassis.drive_to_point(63, -30.7, 0, 5, 6, 7, 500, 650); //back to right of goal
@@ -598,7 +598,7 @@ void skills(){
   matchloader_down = true;
   storeBall(12, volt);
   straightline_to_pose(50, 72, 7, 6, 1, 700, 800); 
-  drive_time(2, 1300);
+  drive_time(2, 1400);
   //chassis.drive_distance(18, 0, 2, 6, 3, 1400, 1600);
   //chassis.drive_distance(-10, 0, 10, 6, 3, 300, 350);
   straightline_to_pose(50, 20, 6, 1, 1, 700, 800, true);
@@ -622,19 +622,19 @@ void skills(){
   backRightResetPosition();
   wait(50, msec);
   
-  chassis.turn_to_point(-48, 40, 0, 8, 1, 400, 500);
-  straightline_to_pose(-48, 40, 10, 8, 0.1, 900, 1020);
+  chassis.turn_to_point(-50, 40, 0, 8, 1, 400, 500);
+  straightline_to_pose(-50, 40, 10, 8, 0.1, 900, 1020);
   chassis.turn_to_angle(0, 8, 1, 580, 600);
   horizontalResetPosition();
-  straightline_to_pose(-48, 18, 6, 1, 1, 500, 600, true);
+  straightline_to_pose(-50, 18, 6, 1, 1, 500, 600, true);
   hood_down = false;
   Intake.spin(reverse, 10, volt);
   wait(50, msec);
-  scoreTopGoal(800);
+  scoreTopGoal(900);
   matchloader_down = true;
   storeBall(12, volt);
   straightline_to_pose(-50, 72, 7, 6, 1, 700, 800); 
-  drive_time(2, 1300);
+  drive_time(2, 1400);
   //chassis.drive_distance(18, 0, 2, 6, 3, 1400, 1600);
   //chassis.drive_distance(-10, 0, 10, 6, 3, 300, 350);
   straightline_to_pose(-50, 25, 6, 1, 1, 700, 800, true);
@@ -662,8 +662,8 @@ void skills(){
   straightline_to_pose(-15, -12, 6, 3, 1, 600, 700, true);
   Intake.stop();
   UpperIntakeLift.set(true);
-  wait(200, msec);
-  scoreMiddleGoal(6, 10, 10, volt);
+  wait(150, msec);
+  scoreMiddleGoal(5.5, 10, 10, volt);
   wait(1200, msec);
   matchloader_down = false;
 
@@ -675,7 +675,7 @@ void skills(){
   chassis.turn_to_angle(180, 8, 1, 600, 700);
   wait(100, msec);
   //horizontalResetPosition();
-  straightline_to_pose(-50, -68, 8, 3, 1, 700, 900);
+  straightline_to_pose(-50, -68, 7, 3, 1, 700, 900);
   drive_time(2, 1300);
   straightline_to_pose(-50, -20, 8, 3, 1, 700, 900, true);
   scoreTopGoal(600);
