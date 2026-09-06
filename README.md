@@ -6,6 +6,8 @@ The routine here is part of the program that earned **2053X a top-150 global ran
 
 > **What this is, for non-robotics readers:** an embedded C++ control system that drives a robot along a planned path using closed-loop feedback. It tracks its own position on the field in real time, corrects its motion with PID controllers, and reacts to sensor input (distance, optical/color) to stay accurate over a long autonomous sequence — the same control-systems ideas used in self-driving and industrial robotics, at small scale.
 
+Brookie is the name of the robot!
+
 ## Technical highlights
 
 - **Odometry position tracking** — the robot continuously estimates its (x, y, heading) on the field from tracking-wheel and IMU data, so movements are specified as *"drive to point (48, -28)"* rather than blind timed motions.
